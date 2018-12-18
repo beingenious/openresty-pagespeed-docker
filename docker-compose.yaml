@@ -1,0 +1,15 @@
+version: "3"
+services:
+  basic:
+   build: ./
+   image: dalongrong/openresty-pagespeed:1.13.35.2
+   ports:
+   - "8080:80"
+  basic-fat:
+   build: 
+     context: ./
+     dockerfile: Dockerfile.fat
+   image: dalongrong/openresty-pagespeed:1.13.35.2-fat
+   ports:
+   - "8081:80"
+  
