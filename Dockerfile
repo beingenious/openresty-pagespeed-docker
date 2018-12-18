@@ -70,6 +70,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
         make \
         perl \
         unzip \
+        uuid-dev \
         zlib1g-dev \
     && cd /tmp \
     && curl -fSL https://www.openssl.org/source/openssl-${RESTY_OPENSSL_VERSION}.tar.gz -o openssl-${RESTY_OPENSSL_VERSION}.tar.gz \
