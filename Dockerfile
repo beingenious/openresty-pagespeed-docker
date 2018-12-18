@@ -35,7 +35,6 @@ RUN git clone -b ${MOD_PAGESPEED_TAG} \
               https://github.com/apache/incubator-pagespeed-mod.git \
               modpagespeed \
     ;
-
 WORKDIR /usr/src/modpagespeed
 
 COPY patches/modpagespeed/*.patch ./
@@ -153,7 +152,7 @@ RUN curl -fSL https://github.com/apache/incubator-pagespeed-ngx/archive/v1.13.35
 COPY --from=pagespeed /usr/src/ngxpagespeed /tmp/incubator-pagespeed-ngx-1.13.35.2-stable/
 RUN curl -fSL https://dl.google.com/dl/page-speed/psol/1.13.35.2-x64.tar.gz -o 1.13.35.2-x64.tar.gz \
     && tar -xzvf 1.13.35.2-x64.tar.gz \
-    && cp -rf psol /tmp/incubator-pagespeed-ngx-1.13.35.2-stable
+    && cp -rf psol /tmp/incubator-pagespeed-ngx-1.13.35.2-stable/
 RUN curl -fSL https://www.openssl.org/source/openssl-${RESTY_OPENSSL_VERSION}.tar.gz -o openssl-${RESTY_OPENSSL_VERSION}.tar.gz \
     && tar xzf openssl-${RESTY_OPENSSL_VERSION}.tar.gz \
     && curl -fSL https://ftp.pcre.org/pub/pcre/pcre-${RESTY_PCRE_VERSION}.tar.gz -o pcre-${RESTY_PCRE_VERSION}.tar.gz \
