@@ -133,6 +133,7 @@ RUN apk add --no-cache \
         linux-headers \
         libressl-dev \
         pcre-dev \
+        curl \
         tar \
         zlib-dev \
     ;
