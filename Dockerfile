@@ -81,6 +81,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
     && tar xzf nginx-pagespeed-1.13.35.2.tar.gz \
     && curl -fSL https://dl.google.com/dl/page-speed/psol/1.13.35.2-x64.tar.gz -o 1.13.35.2-x64.tar.gz \
     && tar -xzvf 1.13.35.2-x64.tar.gz \
+    && cp -rf psol /tmp/incubator-pagespeed-ngx-1.13.35.2-stable \
     && curl -fSL https://openresty.org/download/openresty-${RESTY_VERSION}.tar.gz -o openresty-${RESTY_VERSION}.tar.gz \
     && tar xzf openresty-${RESTY_VERSION}.tar.gz \
     && cd /tmp/openresty-${RESTY_VERSION} \
