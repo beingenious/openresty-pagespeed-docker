@@ -79,7 +79,6 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
     && tar xzf pcre-${RESTY_PCRE_VERSION}.tar.gz \
     && curl -fSL https://github.com/apache/incubator-pagespeed-ngx/archive/v1.13.35.2-stable.tar.gz -o  nginx-pagespeed-1.13.35.2.tar.gz \
     && tar xzf nginx-pagespeed-1.13.35.2.tar.gz \
-    && cd /tmp/incubator-pagespeed-ngx-1.13.35.2-stable \
     && curl -fSL https://dl.google.com/dl/page-speed/psol/1.13.35.2-x64.tar.gz -o 1.13.35.2-x64.tar.gz \
     && tar -xzvf 1.13.35.2-x64.tar.gz \
     && curl -fSL https://openresty.org/download/openresty-${RESTY_VERSION}.tar.gz -o openresty-${RESTY_VERSION}.tar.gz \
