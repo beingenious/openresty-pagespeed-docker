@@ -138,17 +138,19 @@ RUN apk add --no-cache \
         zlib-dev \
     ;
 
-RUN git clone -b ${NGX_PAGESPEED_TAG} \
-              --recurse-submodules \
-              --shallow-submodules \
-              --depth=1 \
-              -c advice.detachedHead=false \
-              -j`nproc` \
-              https://github.com/apache/incubator-pagespeed-ngx.git \
-              ngxpagespeed \
-    ;
-COPY --from=pagespeed /usr/src/ngxpagespeed /tmp/ngxpagespeed/
+# RUN git clone -b ${NGX_PAGESPEED_TAG} \
+#               --recurse-submodules \
+#               --shallow-submodules \
+#               --depth=1 \
+#               -c advice.detachedHead=false \
+#               -j`nproc` \
+#               https://github.com/apache/incubator-pagespeed-ngx.git \
+#               ngxpagespeed \
+#     ;
 
+RUN curl -fSL https://github.com/apache/incubator-pagespeed-ngx/archive/v1.13.35.2-stable.tar.gz -o  nginx-pagespeed-1.13.35.2.tar.gz \
+    && tar xzf nginx-pagespeed-1.13.35.2.tar.gz
+COPY --from=pagespeed /usr/src/ngxpagespeed /tmp/ngxpagespeed/
 RUN curl -fSL https://www.openssl.org/source/openssl-${RESTY_OPENSSL_VERSION}.tar.gz -o openssl-${RESTY_OPENSSL_VERSION}.tar.gz \
     && tar xzf openssl-${RESTY_OPENSSL_VERSION}.tar.gz \
     && curl -fSL https://ftp.pcre.org/pub/pcre/pcre-${RESTY_PCRE_VERSION}.tar.gz -o pcre-${RESTY_PCRE_VERSION}.tar.gz \
