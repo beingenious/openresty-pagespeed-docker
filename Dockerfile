@@ -1,7 +1,9 @@
 # Dockerfile - Debian Jessie
 # https://github.com/openresty/docker-openresty
 
-FROM debian:jessie
+ARG RESTY_IMAGE_BASE="ubuntu"
+ARG RESTY_IMAGE_TAG="xenial"
+FROM ${RESTY_IMAGE_BASE}:${RESTY_IMAGE_TAG}
 
 LABEL maintainer="Evan Wies <evan@neomantra.net>"
 
