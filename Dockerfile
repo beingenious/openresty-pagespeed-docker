@@ -40,7 +40,7 @@ ARG RESTY_CONFIG_OPTIONS="\
     --with-stream \
     --with-stream_ssl_module \
     --with-threads \
-        --add-module=/tmp/incubator-pagespeed-ngx-1.13.35.2-stable \
+    --add-module=/tmp/incubator-pagespeed-ngx-1.13.35.2-stable \
     "
 ARG RESTY_CONFIG_OPTIONS_MORE=""
 
