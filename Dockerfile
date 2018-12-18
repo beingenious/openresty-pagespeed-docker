@@ -165,9 +165,6 @@ RUN && curl -fSL https://www.openssl.org/source/openssl-${RESTY_OPENSSL_VERSION}
         openresty-${RESTY_VERSION}.tar.gz openresty-${RESTY_VERSION} \
         pcre-${RESTY_PCRE_VERSION}.tar.gz pcre-${RESTY_PCRE_VERSION}
 
-RUN ln -sf /dev/stdout /usr/local/openresty/nginx/logs/access.log
-RUN ln -sf /dev/stderr /usr/local/openresty/nginx/logs/error.log
-
 ##########################################
 # Combine everything with minimal layers #
 ##########################################
@@ -181,8 +178,8 @@ COPY --from=nginx /usr/local/openresty /usr/local/openresty
 COPY nginx.conf /usr/local/openresty/nginx/conf/nginx.conf
 COPY nginx.vh.default.conf /etc/nginx/conf.d/default.conf
 ENV PATH=$PATH:/usr/local/openresty/luajit/bin:/usr/local/openresty/nginx/sbin:/usr/local/openresty/bin
-RUN  ln -sf /dev/stdout /var/log/nginx/access.log && \
-    ln -sf /dev/stderr /var/log/nginx/error.log
+RUN  ln -sf /dev/stdout /var/log/nginx/access.log 
+RUN  ln -sf /dev/stderr /var/log/nginx/error.log
 
 EXPOSE 80
 
