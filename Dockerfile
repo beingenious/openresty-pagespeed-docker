@@ -149,7 +149,7 @@ RUN apk add --no-cache \
 
 RUN curl -fSL https://github.com/apache/incubator-pagespeed-ngx/archive/v1.13.35.2-stable.tar.gz -o  nginx-pagespeed-1.13.35.2.tar.gz \
     && tar xzf nginx-pagespeed-1.13.35.2.tar.gz
-COPY --from=pagespeed /usr/src/ngxpagespeed /tmp/incubator-pagespeed-ngx-1.13.35.2-stable/
+# COPY --from=pagespeed /usr/src/ngxpagespeed /tmp/incubator-pagespeed-ngx-1.13.35.2-stable/
 RUN curl -fSL https://dl.google.com/dl/page-speed/psol/1.13.35.2-x64.tar.gz -o 1.13.35.2-x64.tar.gz \
     && tar -xzvf 1.13.35.2-x64.tar.gz \
     && cp -rf psol /tmp/incubator-pagespeed-ngx-1.13.35.2-stable/
