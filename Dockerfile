@@ -11,12 +11,13 @@ FROM ${RESTY_IMAGE_BASE}:${RESTY_IMAGE_TAG} as nginx
 LABEL maintainer="Evan Wies <evan@neomantra.net>"
 
 # Docker Build Arguments
-ARG RESTY_VERSION="1.13.6.1"
-ARG RESTY_LUAROCKS_VERSION="2.4.3"
-ARG RESTY_OPENSSL_VERSION="1.0.2k"
-ARG RESTY_PCRE_VERSION="8.41"
+ARG RESTY_VERSION="1.15.8.2"
+ARG RESTY_LUAROCKS_VERSION="3.1.3"
+ARG RESTY_OPENSSL_VERSION="1.1.1c"
+ARG RESTY_PCRE_VERSION="8.43"
 ARG RESTY_J="1"
 ARG RESTY_CONFIG_OPTIONS="\
+    --with-compat \
     --with-file-aio \
     --with-http_addition_module \
     --with-http_auth_request_module \
@@ -48,6 +49,7 @@ ARG RESTY_CONFIG_OPTIONS="\
     --add-module=/tmp/incubator-pagespeed-ngx-1.13.35.2-stable \
     "
 ARG RESTY_CONFIG_OPTIONS_MORE=""
+ARG RESTY_LUAJIT_OPTIONS="--with-luajit-xcflags='-DLUAJIT_NUMMODE=2 -DLUAJIT_ENABLE_LUA52COMPAT'"
 
 # These are not intended to be user-specified
 ARG _RESTY_CONFIG_DEPS="--with-openssl=/tmp/openssl-${RESTY_OPENSSL_VERSION} --with-pcre=/tmp/pcre-${RESTY_PCRE_VERSION}"
@@ -88,7 +90,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
     && curl -fSL https://openresty.org/download/openresty-${RESTY_VERSION}.tar.gz -o openresty-${RESTY_VERSION}.tar.gz \
     && tar xzf openresty-${RESTY_VERSION}.tar.gz \
     && cd /tmp/openresty-${RESTY_VERSION} \
-    && ./configure -j${RESTY_J} ${_RESTY_CONFIG_DEPS} ${RESTY_CONFIG_OPTIONS} ${RESTY_CONFIG_OPTIONS_MORE} \
+    && eval ./configure -j${RESTY_J} ${_RESTY_CONFIG_DEPS} ${RESTY_CONFIG_OPTIONS} ${RESTY_CONFIG_OPTIONS_MORE} ${RESTY_LUAJIT_OPTIONS} \
     && make -j${RESTY_J} \
     && make -j${RESTY_J} install \
     && cd /tmp \
@@ -115,8 +117,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
 
 
 FROM ${RESTY_IMAGE_BASE}:${RESTY_IMAGE_TAG}
-LABEL maintainer="11415191465@qq.com" \
-      version.mod-pagespeed="1.13.35.2" \
+LABEL version.mod-pagespeed="1.13.35.2" \
       version.ngx-pagespeed="1.13.35.2"
 COPY --from=nginx /usr/local/openresty /usr/local/openresty
 COPY nginx.conf /usr/local/openresty/nginx/conf/nginx.conf
